@@ -187,7 +187,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             self.mapView.addAnnotation(annotation)
         }
         
-
+        // コンパスの表示
+        let compass = MKCompassButton(mapView: mapView)
+        compass.compassVisibility = .visible
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: compass)
+        self.mapView.showsCompass = false
     }
     
     
