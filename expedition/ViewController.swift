@@ -132,19 +132,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate, NFCNDEFReader
 
         // map の縮尺
         var region = mapView.region
-        
         region.center = locationCoordinate
         region.span.latitudeDelta = 0.002
         region.span.longitudeDelta = 0.002
-        
         mapView.setRegion(region, animated: true)
         
-//        // アノテーションの設定
-//        let annotation = MKPointAnnotation()
-//        annotation.coordinate = locationCoordinate
-//        annotation.title = "現在地"
-//        
-//        self.mapView.addAnnotation(annotation)
+        // アノテーションの設定
+        for (title, location) in masterLocations {
+
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = location.coordinate
+            annotation.title = title
+            self.mapView.addAnnotation(annotation)
+        }
+
     }
     
     // [Core NFC Framework] delegate
