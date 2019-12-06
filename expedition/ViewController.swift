@@ -19,7 +19,7 @@ import CoreLocation // Core Location フレームワーク　（デバイスの�
 import CoreNFC // Core NFC フレームワーク
 
 
-class ViewController: UIViewController, CLLocationManagerDelegate, NFCNDEFReaderSessionDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, NFCNDEFReaderSessionDelegate {
 
     private let masterLocations: Dictionary<String, CLLocation> = [
         // 東京
@@ -94,10 +94,33 @@ class ViewController: UIViewController, CLLocationManagerDelegate, NFCNDEFReader
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //デリゲート先に自分を設定する。
+        self.mapView.delegate = self
         // [Core Location Framework] ローケーションマネージャ初期化
         setupLocationManager()
     }
+
     
+    //アノテーションビューを返すメソッド
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation === mapView.userLocation { // 現在地を示すアノテーションの場合はデフォルトのまま
+            return nil
+        } else {
+            // アノテーションをMarkerAnnotationViewで用意する
+            let markerAnnotationView = MKMarkerAnnotationView()
+            markerAnnotationView.glyphText = "♨️"  // アイコンのテキスト
+            markerAnnotationView.markerTintColor = UIColor.yellow
+           
+            markerAnnotationView.canShowCallout = true // タップ時に吹き出しする
+            markerAnnotationView.titleVisibility = MKFeatureVisibility.adaptive
+            //markerAnnotationView.subtitleVisibility = MKFeatureVisibility.adaptive
+            let callout = UILabel()  // 吹き出しのUIコンポーネント
+            callout.text = ""
+            markerAnnotationView.detailCalloutAccessoryView = callout
+
+            return markerAnnotationView
+        }
+    }
     // [Core Location Framework] ローケーションマネージャ初期化
     func setupLocationManager() {
         
@@ -163,8 +186,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, NFCNDEFReader
             annotation.title = title
             self.mapView.addAnnotation(annotation)
         }
+        
 
     }
+    
     
     // [Core NFC Framework] delegate
     //読み取りエラーが起こった時呼ばれる。ユーザーがキャンセルボタンを押すか、タイムアウトしたときに呼ばれる。
