@@ -68,12 +68,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     @IBOutlet weak var mapView: MKMapView!
     @IBAction func nfcButton(_ sender: Any) {
         
-//        if Thread.isMainThread {
-//            print("MainThreadです")
-//        } else {
-//            print("MainThreadではない")
-//        }
-        
         // 現在地をログに表示
         //print("latitude: \(latitude)\nlongitude: \(longitude)")
         print(currentLocation!)
@@ -94,14 +88,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //デリゲート先に自分を設定する。
+        //mapViewのデリゲート先に自分を設定する。
         self.mapView.delegate = self
         // [Core Location Framework] ローケーションマネージャ初期化
         setupLocationManager()
     }
 
     
-    //アノテーションビューを返すメソッド
+    //アノテーションビューを返すメソッド delegate
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation === mapView.userLocation { // 現在地を示すアノテーションの場合はデフォルトのまま
             return nil
@@ -121,6 +115,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             return markerAnnotationView
         }
     }
+    
     // [Core Location Framework] ローケーションマネージャ初期化
     func setupLocationManager() {
         
@@ -212,12 +207,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     /// 読み取りに成功したら呼ばれる。
     func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
         
-//        if Thread.isMainThread {
-//            print("readerSession MainThreadです")
-//        } else {
-//            print("readerSession MainThreadではない")
-//        }
-        
         //DispatchQueue.main.async {
         for message in messages{
             for record in message.records {
@@ -232,22 +221,33 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                     print("identifier: \(identifier)")
                 }
 
-                // NDEF Text Format (https://github.com/somq/nfccard-tool/blob/master/docs/NFC%20Text%20Record%20Type%20Definition%20Technical%20Specification.pdf)
+                // NDEF Text Format
+                // ------------------------------- (https://github.com/somq/nfccard-tool/blob/master/docs/NFC%20Text%20Record%20Type%20Definition%20Technical%20Specification.pdf)
+                // -------------------------------
 
                 let payload = MyNDEFStringPayload(payload: record.payload)
                 print("language: \(payload.language!)")
                 print("text: \(payload.text!)")
                 //print(String.init(data: record.payload, encoding: .utf8))
                 
-                // NFC and LOCATION
-                let locationKey = payload.text!
-                if let location = masterLocations[locationKey]{
-                    
-                    let distance = location.distance(from: currentLocation!)
+                if let targetLocation = masterLocations["戸越銀座温泉"]{
+                    let distance = targetLocation.distance(from: currentLocation!)
                     if (distance < 100) { // 100 メートル以内にいる
-                        print("ようこそ, \(locationKey)へ。（\(location))")
+                        print("ようこそ, (戸越銀座温泉へ。（\(targetLocation))")
+                    } else {
+                        print("近くにおらん")
                     }
                 }
+                
+//                // NFC and LOCATION
+//                let locationKey = payload.text!
+//                if let location = masterLocations[locationKey]{
+//
+//                    let distance = location.distance(from: currentLocation!)
+//                    if (distance < 100) { // 100 メートル以内にいる
+//                        print("ようこそ, \(locationKey)へ。（\(location))")
+//                    }
+//                }
                 
                 
                 print("読み取ったよ")
