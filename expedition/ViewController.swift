@@ -139,12 +139,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, NFCNDEFReader
         
         mapView.setRegion(region, animated: true)
         
-        // アノテーションの設定
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = locationCoordinate
-        annotation.title = "現在地"
-        
-        self.mapView.addAnnotation(annotation)
+//        // アノテーションの設定
+//        let annotation = MKPointAnnotation()
+//        annotation.coordinate = locationCoordinate
+//        annotation.title = "現在地"
+//        
+//        self.mapView.addAnnotation(annotation)
     }
     
     // [Core NFC Framework] delegate
