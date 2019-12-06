@@ -15,7 +15,23 @@
 		3B8E58F5232B36C8003DAA2A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8E58F4232B36C8003DAA2A /* MapKit.framework */; };
 		3B8E58F7232B56AC003DAA2A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8E58F6232B56AC003DAA2A /* CoreLocation.framework */; };
 		3B8E58F9232B737D003DAA2A /* CoreNFC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8E58F8232B737D003DAA2A /* CoreNFC.framework */; };
+		3BA57645239A58C800A761AE /* SCLAlertView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA57644239A58C800A761AE /* SCLAlertView.framework */; };
+		3BA57646239A58C800A761AE /* SCLAlertView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA57644239A58C800A761AE /* SCLAlertView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3BA57647239A58C800A761AE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3BA57646239A58C800A761AE /* SCLAlertView.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3B8E58DD232B3404003DAA2A /* expedition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = expedition.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -32,6 +48,7 @@
 		3B8E58FE232B90A9003DAA2A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3BA57642239A0EDE00A761AE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		3BA57643239A0EDE00A761AE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		3BA57644239A58C800A761AE /* SCLAlertView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SCLAlertView.framework; path = expedition/Carthage/Build/iOS/SCLAlertView.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +59,7 @@
 				3B8E58F9232B737D003DAA2A /* CoreNFC.framework in Frameworks */,
 				3B8E58F7232B56AC003DAA2A /* CoreLocation.framework in Frameworks */,
 				3B8E58F5232B36C8003DAA2A /* MapKit.framework in Frameworks */,
+				3BA57645239A58C800A761AE /* SCLAlertView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +101,7 @@
 		3B8E58F3232B36C8003DAA2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3BA57644239A58C800A761AE /* SCLAlertView.framework */,
 				3B8E58F8232B737D003DAA2A /* CoreNFC.framework */,
 				3B8E58F6232B56AC003DAA2A /* CoreLocation.framework */,
 				3B8E58F4232B36C8003DAA2A /* MapKit.framework */,
@@ -100,6 +119,7 @@
 				3B8E58D9232B3404003DAA2A /* Sources */,
 				3B8E58DA232B3404003DAA2A /* Frameworks */,
 				3B8E58DB232B3404003DAA2A /* Resources */,
+				3BA57647239A58C800A761AE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -324,6 +344,10 @@
 				CODE_SIGN_ENTITLEMENTS = expedition/expedition.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 28ZN2YA4ZU;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/expedition/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = expedition/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -344,6 +368,10 @@
 				CODE_SIGN_ENTITLEMENTS = expedition/expedition.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 28ZN2YA4ZU;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/expedition/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = expedition/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
 				LD_RUNPATH_SEARCH_PATHS = (

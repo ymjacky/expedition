@@ -17,6 +17,7 @@ import UIKit
 import MapKit
 import CoreLocation // Core Location フレームワーク　（デバイスの地理的位置と向きを取得する）
 import CoreNFC // Core NFC フレームワーク
+import SCLAlertView // UI用 OSSライブラリ
 
 
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, NFCNDEFReaderSessionDelegate {
@@ -236,6 +237,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                         print("ようこそ, (戸越銀座温泉へ。（\(targetLocation))")
                     } else {
                         print("近くにおらん")
+                        //
                     }
                 }
                 
@@ -259,6 +261,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         }
         
         print("読み取り終了")
+        SCLAlertView().showInfo("歓迎します！", subTitle: "戸越銀座温泉")
         //}
 
     }
