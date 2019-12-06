@@ -22,8 +22,31 @@ import CoreNFC // Core NFC フレームワーク
 class ViewController: UIViewController, CLLocationManagerDelegate, NFCNDEFReaderSessionDelegate {
 
     private let masterLocations: Dictionary<String, CLLocation> = [
-        "大崎": CLLocation(latitude: 35.61529284902742, longitude: 139.73070759877672),
-        "東京": CLLocation(latitude: 35.682008, longitude: 139.765996)
+        // 東京
+        "戸越銀座温泉": CLLocation(latitude: 35.614973, longitude: 139.718936),
+        "東京染井温泉SAKURA": CLLocation(latitude: 35.738057, longitude: 139.739930),
+        "鷗外温泉": CLLocation(latitude: 35.716455, longitude: 139.770049),
+        "東京前野原温泉さやの湯処": CLLocation(latitude: 35.771077, longitude: 139.693196),
+        // 茨城
+        "天然温泉きぬの湯": CLLocation(latitude: 35.983200, longitude: 139.964557),
+        // 埼玉
+        "竜泉寺の湯 草加谷塚店": CLLocation(latitude: 35.814517, longitude: 139.788396),
+        "天然温泉 野天湯元 湯快爽快 湯けむり横丁 埼玉三郷店": CLLocation(latitude: 35.850758, longitude: 139.864516),
+        "杉戸天然温泉 雅楽の湯": CLLocation(latitude: 36.041397, longitude: 139.741367),
+        "早稲田天然温泉 めぐみの湯": CLLocation(latitude: 35.851993, longitude: 139.878843),
+        "よしかわ天然温泉ゆあみ": CLLocation(latitude: 35.882955, longitude: 139.873613),
+        // 千葉
+        "法典の湯": CLLocation(latitude: 35.735486, longitude: 139.965116),
+        "天然温泉 湯～ねる": CLLocation(latitude: 35.665686, longitude: 140.014745),
+        "極楽湯 柏店": CLLocation(latitude: 35.886293, longitude: 139.976954),
+        "天然温泉 白井の湯": CLLocation(latitude: 35.827422, longitude: 140.139672),
+        "真名井の湯 千葉ニュータウン店": CLLocation(latitude: 35.801600, longitude: 140.140181),
+        "ORIENTAL RESORT ReSpa INZAI リスパ印西": CLLocation(latitude: 35.806941, longitude: 140.174047),
+        "龍泉の湯": CLLocation(latitude: 35.806777, longitude: 140.307557),
+        "大和の湯": CLLocation(latitude: 35.817267, longitude: 140.272144),
+        "のだ温泉 ほのか": CLLocation(latitude: 35.940058, longitude: 139.882119),
+        "七光台温泉": CLLocation(latitude: 35.982439, longitude: 139.850674),
+        "みのりの湯柏健康センター": CLLocation(latitude: 35.883449, longitude: 139.962957)
     ]
     
     private let numArray:[CLLocation] = [
@@ -118,23 +141,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, NFCNDEFReader
         let latitude = location?.coordinate.latitude ?? 0 // 経度
         let longitude = location?.coordinate.longitude ?? 0 // 緯度
         
-        //print("latitude: \(latitude)\nlongitude: \(longitude)")
-        
-        currentLocation = locations.first;
-        
-        // 大崎
-        // latitude: 35.61529284902742
-        // longitude: 139.73070759877672
-        let locationCoordinate = CLLocationCoordinate2DMake(latitude, longitude)
-        
         // 表示するマップの中心を、取得した位置情報のポイントに指定
+        currentLocation = locations.first;
+        let locationCoordinate = CLLocationCoordinate2DMake(latitude, longitude)
         mapView.setCenter(locationCoordinate, animated: false)
 
         // map の縮尺
         var region = mapView.region
         region.center = locationCoordinate
-        region.span.latitudeDelta = 0.002
-        region.span.longitudeDelta = 0.002
+        // region.span.latitudeDelta = 0.002
+        // region.span.longitudeDelta = 0.002
+        region.span.latitudeDelta = 0.020
+        region.span.longitudeDelta = 0.020
         mapView.setRegion(region, animated: true)
         
         // アノテーションの設定
